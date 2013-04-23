@@ -11,48 +11,6 @@
 <script type="text/javascript" src="js/iscroll.js"></script>
 <script type="text/javascript" src="js/zside.js"></script>
 
-<script type="text/javascript">
-
-var cssScroll;
-function loaded() {
-	cssScroll = new iScroll('css', { checkDOMChanges: true, fadeScrollbar: true });
-	jsScroll = new iScroll('js', { checkDOMChanges: true });
-	phpScroll = new iScroll('php', { checkDOMChanges: true });
-}
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-/* * * * * * * *
- *
- * Use this for high compatibility (iDevice + Android)
- *
- */
-document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
-/*
- * * * * * * * */
-
-
-/* * * * * * * *
- *
- * Use this for iDevice only
- *
- */
-//document.addEventListener('DOMContentLoaded', loaded, false);
-/*
- * * * * * * * */
-
-
-/* * * * * * * *
- *
- * Use this if nothing else works
- *
- */
-//window.addEventListener('load', setTimeout(function () { loaded(); }, 200), false);
-/*
- * * * * * * * */
-
-</script>
-
 <style type="text/css" media="all">
 body,ul,li {
 	padding:0;
@@ -169,11 +127,11 @@ body {
 </div>
 <div id="wrapper">
 	<div id="main" style="background: red;">
-		<a href="#css">CSS</a>
+		<a href="#list" id="css">CSS</a>
 		<br />
-		<a href="#js">Javascript</a>
+		<a href="#list" id="js">Javascript</a>
 		<br />
-		<a href="#php">PHP</a>
+		<a href="#list" id="php">PHP</a>
 	</div>
 	<div id="sub1" style="background: green;">
 		sub1
@@ -181,26 +139,15 @@ body {
 	<div id="sub2" style="background: yellow;">
 		sub2
 	</div>
-	<div id="css" style="background: yellow;">
+	<div id="list" style="background: yellow;">
 		<div class="scroller">
 			<ul>
 				<li>加载中,请稍后...</li>
 			</ul>
 		</div>
 	</div>
-	<div id="js" style="background: yellow;">
-		<div class="scroller">
-			<ul>
-				<li>加载中,请稍后...</li>
-			</ul>
-		</div>
-	</div>
-	<div id="php" style="background: yellow;">
-		<div class="scroller">
-			<ul>
-				<li>加载中,请稍后...</li>
-			</ul>
-		</div>
+	<div id="detail" style="background: yellow;">
+		detail
 	</div>
 </div>
 <div id="footer">
