@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,9 +13,11 @@
 
 <script type="text/javascript">
 
-var myScroll;
+var cssScroll;
 function loaded() {
-	// myScroll = new iScroll('wrapper');
+	cssScroll = new iScroll('css', { checkDOMChanges: true, fadeScrollbar: true });
+	jsScroll = new iScroll('js', { checkDOMChanges: true });
+	phpScroll = new iScroll('php', { checkDOMChanges: true });
 }
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -124,7 +126,6 @@ body {
 	opacity: 0;
 	width: 100%;
 	height: 100%;
-	
 	-webkit-transform: translate(100%, 0%) scale(1) translateZ(0px);
 }
 
@@ -132,10 +133,31 @@ body {
 	opacity: 1;
 	-webkit-transform: translate(0%, 0%) scale(1) translateZ(0px);
 }
+
+.scroller ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:left;
+}
+
+.scroller li {
+	padding:0 10px;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #fff;
+	background-color:#fafafa;
+	font-size:14px;
+}
 </style>
 
 <script type="text/javascript">
 	$(document).ready( function () {
+		$('button').on( 'click', function () {
+			$.get( 'data/data.js' );
+		});
 	});
 </script>
 </head>
@@ -147,13 +169,38 @@ body {
 </div>
 <div id="wrapper">
 	<div id="main" style="background: red;">
-		mainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmainmain
+		<a href="#css">CSS</a>
+		<br />
+		<a href="#js">Javascript</a>
+		<br />
+		<a href="#php">PHP</a>
 	</div>
 	<div id="sub1" style="background: green;">
 		sub1
 	</div>
 	<div id="sub2" style="background: yellow;">
 		sub2
+	</div>
+	<div id="css" style="background: yellow;">
+		<div class="scroller">
+			<ul>
+				<li>加载中,请稍后...</li>
+			</ul>
+		</div>
+	</div>
+	<div id="js" style="background: yellow;">
+		<div class="scroller">
+			<ul>
+				<li>加载中,请稍后...</li>
+			</ul>
+		</div>
+	</div>
+	<div id="php" style="background: yellow;">
+		<div class="scroller">
+			<ul>
+				<li>加载中,请稍后...</li>
+			</ul>
+		</div>
 	</div>
 </div>
 <div id="footer">
