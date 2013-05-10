@@ -3,8 +3,9 @@
 		searchScroll, favScroll,
 		appName = '面试宝典',
 		// baseUrl = 'http://zzhdf.cn/data/',
-		baseUrl = 'http://192.168.0.245/bd/data/',
+		// baseUrl = 'http://192.168.0.245/bd/data/',
 		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
+		baseUrl = 'http://0.baodian.duapp.com/',
 		ls = window.localStorage,
 		DATA_MAPPING = [ 'v', 'css', 'css3', 'js', 'jquery', 'html5', 'php', 'sql', 'srsy', 'about' ];
 		
@@ -74,18 +75,44 @@
 			if ( ls ) {
 				val = ls.getItem( 'v' );
 			}
-	
-			$.get( baseUrl + 'version.txt?t='+new Date().getTime(), function ( data ) {
-				data = JSON.parse( data );
-				if ( !val || data.v > val ) {
-					console.log( 'init data...' );
-					$.ajax({
-						url: baseUrl + 'data.js?t='+new Date().getTime(),
-						dataType: 'jsonp'
-					});
-					console.log( 'init data finish...' );
+			
+			$.getJSON( baseUrl + 'version.json?callback=?&t='+new Date().getTime(), function ( data ) {
+				if ( !val || data > val ) {
+					alert('系统发现新的知识库，请到设置模块更新！');
 				}
 			});
+			
+			// $.ajax({
+				// url: baseUrl + 'version.json?jsonp=?&t='+new Date().getTime(),
+				// dataType: 'jsonp',
+    			// jsonp: 'jsonp',
+				// success: function ( data, status, xhr ) {
+					// alert(99)
+					// data = JSON.parse( data );
+					// if ( !val || data.v > val ) {
+						// console.log( 'init data...' );
+						// $.ajax({
+							// url: baseUrl + 'data.js?t='+new Date().getTime(),
+							// dataType: 'jsonp'
+						// });
+						// console.log( 'init data finish...' );
+					// }
+				// },
+				// error: function (xhr, errorType, error) {
+					// alert(88)
+				// }
+			// });
+		},
+		
+		onUpdateBtnTap: function () {
+			console.log( 'update data...' );
+			$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
+				console.log( 'update data finish...' );
+			});
+			// $.ajax({
+				// url: baseUrl + 'data.js?t='+new Date().getTime(),
+				// dataType: 'jsonp'
+			// });
 		},
 		
 		renderULById: function ( id ) {
