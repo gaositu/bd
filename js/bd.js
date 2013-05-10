@@ -1,6 +1,6 @@
 ;( function ( window, $, zside ) {
 	var myScroll, listScroll, historyScroll,
-		searchScroll,
+		searchScroll, favScroll,
 		appName = '面试宝典',
 		baseUrl = 'http://192.168.0.245/bd/data/',
 		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
@@ -19,6 +19,7 @@
 			listScroll = new iScroll( 'list', { checkDOMChanges: true } );
 			historyScroll = new iScroll( 'history', { checkDOMChanges: true } );
 			searchScroll = new iScroll( 'search', { checkDOMChanges: true } );
+			favScroll = new iScroll( 'favorite', { checkDOMChanges: true } );
 		},
 		
 		onHomeIconTap: function ( title, from, id, tmpHref, target ) {
