@@ -2,8 +2,8 @@
 	var myScroll, listScroll, historyScroll,
 		searchScroll,
 		appName = '面试宝典',
-		baseUrl = 'http://192.168.0.245/m/bd5/data/',
-		baseUrl = 'http://192.168.1.102/m/bd6/data/',
+		baseUrl = 'http://192.168.0.245/bd/data/',
+		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
 		ls = window.localStorage,
 		DATA_MAPPING = [ 'v', 'css', 'css3', 'js', 'jquery', 'html5', 'php', 'sql', 'srsy', 'about' ];
 		
@@ -37,6 +37,8 @@
 				});
 				if ( '#history' == tmpHref ) {
 					this.showHistory();
+				} else if ( '#favorite' == tmpHref ) {
+					this.showFav();
 				}
 			}
 			
@@ -64,7 +66,8 @@
 				val = ls.getItem( 'v' );
 			}
 	
-			$.get( baseUrl + 'version.json?t='+new Date().getTime(), function ( data ) {
+			$.get( baseUrl + 'version.txt?t='+new Date().getTime(), function ( data ) {
+				data = JSON.parse( data );
 				if ( !val || data.v > val ) {
 					console.log( 'init data...' );
 					$.ajax({
@@ -113,11 +116,35 @@
 		},
 		
 		onListItemTap: function ( title, from, id, tmpHref, target ) {
-			var val = this.getValueByKey( title );
+			var val = this.getValueByKey( title ),
+				$header = $('#header');
 			$('#header #leftBtn').attr( 'href', '#list' );
+			// TODO
+			$header.find('#rightBtn').hide();
+			$header.find('#favBtn').attr( 'title', title ).show();
 			$('#header label').text( this.reviseKey( title ) || appName );
 			$('#detail').html( '<p>' + val + '</p>' );
 			this.addToHistory( title );
+		},
+		
+		onFavTap: function ( title, from, id, tmpHref, target ) {
+			var f = this.getValueByKey( 'f' ), fObj = JSON.parse( f ),
+				key = $( target ).attr( 'title' ),
+				tmpIndex = $.inArray( key, fObj );
+			if ( tmpIndex > -1 ) {
+				fObj.splice( tmpIndex, 1 );
+			}
+			fObj.unshift( key );
+			this.setValueByKey( 'f', JSON.stringify( fObj ) );
+		},
+		
+		showFav: function () {
+			var arr = this.getValueArrayByKey( 'f' ), 
+				i, len = arr.length, str = '';
+			for ( i=0; i<len; i++ ) {
+				str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+			}
+			$('#favorite ul').html( str );
 		},
 		
 		getValueByKey: function ( key ) {

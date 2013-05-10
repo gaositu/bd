@@ -49,6 +49,11 @@ a {
 	right: 0;
 }
 
+#favBtn {
+	right: 0;
+	display: none;
+}
+
 #footer {
 	position:absolute; z-index:2;
 	bottom:0; left:0;
