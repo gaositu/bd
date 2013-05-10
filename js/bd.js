@@ -2,6 +2,7 @@
 	var myScroll, listScroll, historyScroll,
 		searchScroll, favScroll,
 		appName = '面试宝典',
+		// baseUrl = 'http://zzhdf.cn/data/',
 		baseUrl = 'http://192.168.0.245/bd/data/',
 		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
 		ls = window.localStorage,
@@ -24,7 +25,7 @@
 		
 		onHomeIconTap: function ( title, from, id, tmpHref, target ) {
 			var $masker = $( '#footer .masker'),
-				index;
+				index, $header = $('#header');
 			$('#header label').text( title || appName );
 			if ( 'tabbar' != from ) {
 				$('#header #leftBtn').attr( 'href', '#home' ).attr( 'title', title ).show();
@@ -41,19 +42,26 @@
 				} else if ( '#favorite' == tmpHref ) {
 					this.showFav();
 				}
+				$('#header #leftBtn').hide();
 			}
 			
-			$('#header').show();
+			$header.find('#rightBtn').show();
+			$header.find('#favBtn').hide();
+			$header.show();
 			listScroll.scrollTo( 0, 0, 100 );
 		},
 		
 		onLeftBtnTap: function ( title, from, id, tmpHref, target ) {
+			var $header = $('#header')
 			if ( '#list' == tmpHref ) {
 				$('#header #leftBtn').attr( 'href', '#home' ).attr( 'title', '' );
 			} else {
 				$('#header #leftBtn').hide();
 			}
 			$('#header label').text( title || appName );
+			
+			$header.find('#rightBtn').show();
+			$header.find('#favBtn').hide();
 			$('#header').show();
 		},
 		
@@ -120,7 +128,6 @@
 			var val = this.getValueByKey( title ),
 				$header = $('#header');
 			$('#header #leftBtn').attr( 'href', '#list' );
-			// TODO
 			$header.find('#rightBtn').hide();
 			$header.find('#favBtn').attr( 'title', title ).show();
 			$('#header label').text( this.reviseKey( title ) || appName );
