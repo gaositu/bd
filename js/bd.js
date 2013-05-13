@@ -26,19 +26,22 @@
 		},
 		
 		onHomeIconTap: function ( title, from, id, tmpHref, target ) {
-			var $masker = $( '#footer .masker'),
-				index, $header = $('#header');
+			var index, $header = $('#header'),
+				$activeTab = $('#footer a');
+				/*$masker = $( '#footer .masker');*/
 			$('#header label').text( title || appName );
 			if ( 'tabbar' != from ) {
 				$('#header #leftBtn').attr( 'href', '#home' ).attr( 'title', title ).show();
 				this.renderULById( id );
 			} else {
-				index = $(target).index() * 100;
+				index = $(target).index();
+				$activeTab.eq( index ).addClass( 'on' ).siblings().removeClass( 'on' );
+				/*index = $(target).index() * 100;
 				$masker.css({
 					'-webkit-transition': '-webkit-transform 200ms',
 					'-webkit-transform-origin': '0% 0%', 
 					'-webkit-transform': 'translate('+index+'%, 0%) scale(1) translateZ(0px)'
-				});
+				});*/
 				if ( '#history' == tmpHref ) {
 					this.showHistory();
 				} else if ( '#favorite' == tmpHref ) {

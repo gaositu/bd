@@ -154,14 +154,17 @@ a {
 	z-index: 100;
 }
 
-#footer .masker {
+#footer .footer-item a.on {
+	background: url(../img/tabbg.png) no-repeat center center;
+}
+/*#footer .masker {
 	background-color: black;
 	width: 25%;
 	height: 48px;
 	position: absolute;
 	left: 0px;
 	bottom: 0px;
-}
+}*/
 
 /* search */
 #sHeader div {
