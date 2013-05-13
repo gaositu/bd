@@ -5,7 +5,8 @@
 		// baseUrl = 'http://zzhdf.cn/data/',
 		// baseUrl = 'http://192.168.0.245/bd/data/',
 		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
-		baseUrl = 'http://0.baodian.duapp.com/',
+		// baseUrl = 'http://0.baodian.duapp.com/',
+		baseUrl = 'http://baodian.duapp.com/data/',
 		ls = window.localStorage,
 		DATA_MAPPING = [ 'v', 'css', 'css3', 'js', 'jquery', 'html5', 'php', 'sql', 'srsy', 'about' ];
 		
