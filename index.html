@@ -17,16 +17,22 @@
 </head>
 <body>
 <div id="sHeader">
+	<div class="search-container">
+		<div><input type="text" id="searchTxt" placeholder="请输入需要搜索内容..."/></div>
+		<div id="searchDiv"><img src="img/search.png"/></div>
+	</div>	
+	<!--
 	<div>
 		<input id="searchTxt" type="text" />
 		<a id="searchBtn" href="#">搜索</a>
 	</div>
+	-->
 </div>
 <div id="header">
-	<a id="leftBtn" callback="onLeftBtnTap">返回</a>
+	<a id="leftBtn" callback="onLeftBtnTap"><img src="img/ht.png"/></a>
 	<label>面试宝典</label>
-	<a id="rightBtn" href="#search" callback="onRightBtnTap">搜索</a>
-	<a id="favBtn" href="#" callback="onFavTap">收藏</a>
+	<a id="rightBtn" href="#search" callback="onRightBtnTap"><img src="img/sss.png"/></a>
+	<a id="favBtn" href="#" callback="onFavTap"><img src="img/xsc.png"/></a>
 </div>
 <div id="wrapper">
 	<div id="home">
@@ -71,10 +77,10 @@
 					<br />
 					<strong>SQL</strong>
 				</a>
-				<a href="#" id="" title="">
+				<a href="#list" id="new" title="">
 					<img src="img/icon/about.png" />
 					<br />
-					<strong>四软四硬</strong>
+					<strong>最新面试题</strong>
 				</a>
 				<a href="#list" id="about" title="关于我们" callback="onHomeIconTap">
 					<img src="img/icon/about.png" />
@@ -114,7 +120,7 @@
 	</div>
 	
 	<div id="config">
-		<a id="updateBtn" href="#" callback="onUpdateBtnTap">更新知识库(当前版本<label>无</label>)</a>
+		<a id="updateBtn" href="#" callback="onUpdateBtnTap">更新知识库(当前版本<label>0.1</label>)</a>
 		<p>如果长时间未更新成功,请重启App再试</p>
 	</div>
 	
