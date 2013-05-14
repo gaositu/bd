@@ -110,17 +110,40 @@
 			// });
 		},
 		
+		loadNewVersion: function () {
+			var $updateBtn = $('#config a');
+			$updateBtn.text( '知识库更新中...' );
+			try {
+				$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
+					$updateBtn.removeAttr( 'href' ).text( '已更新,最新版本[v' + ls.getItem('v') + ']' );
+				});
+			} catch(e) {};
+		},
+		
 		onUpdateBtnTap: function () {
-			$('#config a').text( '知识库更新中...' );
+			var val, $updateBtn = $('#config a');
+			if ( ls ) {
+				val = ls.getItem( 'v' );
+			}
+			$.getJSON( baseUrl + 'version.json?callback=?&t='+new Date().getTime(), function ( data ) {
+				if ( !val || data > val ) {
+					$updateBtn.attr( 'callback', 'loadNewVersion' ).text( '发现新知识库,请点击更新' );
+				} else {
+					$updateBtn.removeAttr( 'href' ).text( '已经是最新知识库' );
+				}
+			});
+			
+			/*$('#config a').text( '知识库更新中...' );
 			try {
 				$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
 					$('#config a').removeAttr( 'href' ).text( '已更新,最新版本' + ls.getItem('v') );
 				});
-			} catch(e) {};
-			// $.ajax({
-				// url: baseUrl + 'data.js?t='+new Date().getTime(),
-				// dataType: 'jsonp'
-			// });
+			} catch(e) {};*/
+			
+			/*$.ajax({
+				url: baseUrl + 'data.js?t='+new Date().getTime(),
+				dataType: 'jsonp'
+			});*/
 		},
 		
 		renderULById: function ( id ) {
@@ -269,7 +292,7 @@
 		},
 		
 		showVersion: function () {
-			$('#config label').text( ls.getItem( 'v' ) );
+			$('#config label').text( ls.getItem( 'v' ) || '0' );
 		}
 	});
 	

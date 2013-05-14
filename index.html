@@ -77,10 +77,10 @@
 					<br />
 					<strong>SQL</strong>
 				</a>
-				<a href="#list" id="new" title="">
+				<a href="#list" id="new" title="面试题">
 					<img src="img/icon/about.png" />
 					<br />
-					<strong>最新面试题</strong>
+					<strong>面试题</strong>
 				</a>
 				<a href="#list" id="about" title="关于我们" callback="onHomeIconTap">
 					<img src="img/icon/about.png" />
@@ -120,8 +120,10 @@
 	</div>
 	
 	<div id="config">
-		<a id="updateBtn" href="#" callback="onUpdateBtnTap">更新知识库(当前版本<label>0.1</label>)</a>
-		<p>如果长时间未更新成功,请重启App再试</p>
+		<div>
+			<a id="updateBtn" href="#" callback="onUpdateBtnTap">检查更新知识库,当前版本[v<label></label>]</a>
+			<p>如果长时间未更新成功,请重启App再试</p>
+		</div>
 	</div>
 	
 	<div id="search">
