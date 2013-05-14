@@ -13,7 +13,7 @@
 	$.extend( zside, {
 		init: function () {
 			this.initScroll();
-			this.initData();
+			// this.initData();
 			this.initSearch();
 		},
 		
@@ -46,6 +46,8 @@
 					this.showHistory();
 				} else if ( '#favorite' == tmpHref ) {
 					this.showFav();
+				} else if ( '#config' == tmpHref ) {
+					this.showVersion();
 				}
 				$('#header #leftBtn').hide();
 			}
@@ -109,10 +111,12 @@
 		},
 		
 		onUpdateBtnTap: function () {
-			console.log( 'update data...' );
-			$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
-				console.log( 'update data finish...' );
-			});
+			$('#config a').text( '知识库更新中...' );
+			try {
+				$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
+					$('#config a').removeAttr( 'href' ).text( '已更新,最新版本' + ls.getItem('v') );
+				});
+			} catch(e) {};
 			// $.ajax({
 				// url: baseUrl + 'data.js?t='+new Date().getTime(),
 				// dataType: 'jsonp'
@@ -179,11 +183,14 @@
 		
 		showFav: function () {
 			var arr = this.getValueArrayByKey( 'f' ), 
-				i, len = arr.length, str = '';
-			for ( i=0; i<len; i++ ) {
-				str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+				i, len, str = '';
+			if ( arr ) {
+				len = arr.length;
+				for ( i=0; i<len; i++ ) {
+					str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+				}
+				$('#favorite ul').html( str );
 			}
-			$('#favorite ul').html( str );
 		},
 		
 		getValueByKey: function ( key ) {
@@ -211,11 +218,14 @@
 		
 		showHistory: function () {
 			var arr = this.getValueArrayByKey( 'h' ), 
-				i, len = arr.length, str = '';
-			for ( i=0; i<len; i++ ) {
-				str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+				i, len, str = '';
+			if ( arr ) {
+				len = arr.length
+				for ( i=0; i<len; i++ ) {
+					str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+				}
+				$('#history ul').html( str );
 			}
-			$('#history ul').html( str );
 		},
 		
 		getValueArrayByKey: function ( key ) {
@@ -256,6 +266,10 @@
 				}
 			}
 			return tmpArr;
+		},
+		
+		showVersion: function () {
+			$('#config label').text( ls.getItem( 'v' ) );
 		}
 	});
 	

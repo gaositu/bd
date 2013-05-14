@@ -19,7 +19,7 @@
 <div id="sHeader">
 	<div>
 		<input id="searchTxt" type="text" />
-		<input id="searchBtn" type="button" value="搜索" />
+		<a id="searchBtn" href="#">搜索</a>
 	</div>
 </div>
 <div id="header">
@@ -114,7 +114,8 @@
 	</div>
 	
 	<div id="config">
-		<a id="updateBtn" href="#" callback="onUpdateBtnTap">更新知识库</a>
+		<a id="updateBtn" href="#" callback="onUpdateBtnTap">更新知识库(当前版本<label>无</label>)</a>
+		<p>如果长时间未更新成功,请重启App再试</p>
 	</div>
 	
 	<div id="search">
