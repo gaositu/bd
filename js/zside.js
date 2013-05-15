@@ -8,7 +8,7 @@
 
 var zside = ( function ( window, $, undefined ) {
 	var zside = {
-		version: '1.1',
+		version: '1.2',
 		initialize: function () {
 			this.bindAnchorEvt();
 		},

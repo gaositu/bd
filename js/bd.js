@@ -67,6 +67,10 @@
 			}
 			$('#header label').text( title || appName );
 			
+			if ( '#home' == tmpHref ) {
+				$('#header label').text( appName );
+			} 
+			
 			$header.find('#rightBtn').show();
 			$header.find('#favBtn').hide();
 			$('#header').show();
@@ -222,7 +226,7 @@
 			if ( arr ) {
 				len = arr.length
 				for ( i=0; i<len; i++ ) {
-					str += '<li><a href="#detail" title="'+arr[i]+'">' + this.reviseKey( arr[i] ) + '</a></li>';
+					str += '<li><a href="#detail" title="'+arr[i]+'" callback="onListItemTap">' + this.reviseKey( arr[i] ) + '</a></li>';
 				}
 				$('#history ul').html( str );
 			}
