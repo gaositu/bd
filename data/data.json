@@ -1,6 +1,6 @@
 ﻿var ls = window.localStorage;
-var lsf = ls.getItem( 'f' );
-var lsh = ls.getItem( 'h' );
+var lsf = ls.getItem( 'f' ) || '[]';
+var lsh = ls.getItem( 'h' ) || '[]';
 ls.clear();
 ls.setItem( 'f', lsf );
 ls.setItem( 'h', lsh );
