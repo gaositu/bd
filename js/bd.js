@@ -1,14 +1,10 @@
 ;( function ( window, $, zside ) {
 	var myScroll, listScroll, historyScroll,
-		searchScroll, favScroll,
+		searchScroll, favScroll, detailScroll,
 		appName = '面试宝典',
-		// baseUrl = 'http://zzhdf.cn/data/',
-		// baseUrl = 'http://192.168.0.245/bd/data/',
-		// baseUrl = 'http://192.168.1.102/m/bd6/data/',
-		// baseUrl = 'http://0.baodian.duapp.com/',
 		baseUrl = 'http://baodian.duapp.com/data/',
 		ls = window.localStorage,
-		DATA_MAPPING = [ 'v', 'css', 'css3', 'js', 'jquery', 'html5', 'php', 'sql', 'srsy', 'about' ];
+		DATA_MAPPING = [ 'v', 'css', 'css3', 'js', 'jquery', 'html5', 'php', 'sql', 'new', 'about' ];
 		
 	$.extend( zside, {
 		init: function () {
@@ -18,11 +14,12 @@
 		},
 		
 		initScroll: function () {
-			myScroll = new iScroll( 'wrapper', { checkDOMChanges: true } );
+			myScroll = new iScroll( 'home', { checkDOMChanges: true } );
 			listScroll = new iScroll( 'list', { checkDOMChanges: true } );
 			historyScroll = new iScroll( 'history', { checkDOMChanges: true } );
 			searchScroll = new iScroll( 'search', { checkDOMChanges: true } );
 			favScroll = new iScroll( 'favorite', { checkDOMChanges: true } );
+			detailScroll = new iScroll( 'detail', { checkDOMChanges: true } );
 		},
 		
 		onHomeIconTap: function ( title, from, id, tmpHref, target ) {
@@ -91,31 +88,10 @@
 					alert('系统发现新的知识库，请到设置模块更新！');
 				}
 			});
-			
-			// $.ajax({
-				// url: baseUrl + 'version.json?jsonp=?&t='+new Date().getTime(),
-				// dataType: 'jsonp',
-    			// jsonp: 'jsonp',
-				// success: function ( data, status, xhr ) {
-					// alert(99)
-					// data = JSON.parse( data );
-					// if ( !val || data.v > val ) {
-						// console.log( 'init data...' );
-						// $.ajax({
-							// url: baseUrl + 'data.js?t='+new Date().getTime(),
-							// dataType: 'jsonp'
-						// });
-						// console.log( 'init data finish...' );
-					// }
-				// },
-				// error: function (xhr, errorType, error) {
-					// alert(88)
-				// }
-			// });
 		},
 		
 		loadNewVersion: function () {
-			var $updateBtn = $('#config a');
+			var $updateBtn = $('#updateBtn');
 			$updateBtn.text( '知识库更新中...' );
 			try {
 				$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
@@ -125,7 +101,9 @@
 		},
 		
 		onUpdateBtnTap: function () {
-			var val, $updateBtn = $('#config a');
+			var val, $updateBtn = $('#updateBtn'), 
+				$clearHistoryBtn = $('#clearHistoryBtn'),
+				$clearFavBtn = $('#clearFavBtn');
 			if ( ls ) {
 				val = ls.getItem( 'v' );
 			}
@@ -136,18 +114,28 @@
 					$updateBtn.removeAttr( 'href' ).text( '已经是最新知识库' );
 				}
 			});
-			
-			/*$('#config a').text( '知识库更新中...' );
-			try {
-				$.getJSON( baseUrl + 'data.json?callback=?&t='+new Date().getTime(), function () {
-					$('#config a').removeAttr( 'href' ).text( '已更新,最新版本' + ls.getItem('v') );
-				});
-			} catch(e) {};*/
-			
-			/*$.ajax({
-				url: baseUrl + 'data.js?t='+new Date().getTime(),
-				dataType: 'jsonp'
-			});*/
+		},
+		
+		clearHistoryBtnTap: function ( title, from, id, tmpHref, target ) {
+			var $target = $( target ),
+				hasTitle = $target.attr( 'title' );
+			if ( hasTitle ) {
+				ls.setItem( 'h', '[]');
+				$( target ).removeAttr( 'href' ).css( 'background', '' ).text( '成功清空历史记录' );
+			} else {
+				$target.css( 'background', 'red' ).text( '数据删除确认，再次点击清空历史记录' ).attr( 'title', 'confirm' );
+			}
+		},
+		
+		clearFavBtnTap: function ( title, from, id, tmpHref, target ) {
+			var $target = $( target ),
+				hasTitle = $target.attr( 'title' );
+			if ( hasTitle ) {
+				ls.setItem( 'f', '[]');
+				$( target ).removeAttr( 'href' ).css( 'background', '' ).text( '成功清空我的收藏' );
+			} else {
+				$target.css( 'background', 'red' ).text( '数据删除确认，再次点击清空我的收藏' ).attr( 'title', 'confirm' );
+			}
 		},
 		
 		renderULById: function ( id ) {
@@ -193,7 +181,7 @@
 			$header.find('#rightBtn').hide();
 			$header.find('#favBtn').attr( 'title', title ).show();
 			$('#header label').text( this.reviseKey( title ) || appName );
-			$('#detail').html( '<p>' + val + '</p>' );
+			$('#detail .area').html( '<p>' + val + '</p>' );
 			this.addToHistory( title );
 		},
 		

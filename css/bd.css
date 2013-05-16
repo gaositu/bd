@@ -121,6 +121,10 @@ a {
 	font-size:14px;
 }
 
+.scroller>ul>li>a {
+	display: block;
+}
+
 /* 111 */
 #wrapper>div {
 	position: absolute;
@@ -154,6 +158,14 @@ a {
 
 #wrapper img {
 	width: 60px;
+}
+
+#wrapper img:active {
+	border: 1px dashed black;
+}
+
+#wrapper img:hover {
+	border: 1px dashed black;
 }
 
 /* footer */
@@ -289,6 +301,9 @@ a {
 
 
 /* detail */
-#detail p {
+#detail p, #about p {
 	margin: 5px;
+}
+#detail p {
+	padding-bottom: 10px;
 }
