@@ -1,21 +1,27 @@
 ﻿var ls = window.localStorage;
-var lsf = ls.getItem( 'f' ) || '[]';
-var lsh = ls.getItem( 'h' ) || '[]';
+var lsf = ls.getItem( "f" ) || "[]";
+var lsh = ls.getItem( "h" ) || "[]";
 ls.clear();
-ls.setItem( 'f', lsf );
-ls.setItem( 'h', lsh );
-ls.setItem( 'v', '1.1' );
+ls.setItem( "f", lsf );
+ls.setItem( "h", lsh );
+ls.setItem( "v", "1.7" );
 // - - - - - - - - - -
 // 1-css
 // 2-css3
 // 3-js
-ls.setItem('3_js闭包','闭包就是内部函数通过某种方式使其可见范围超出了其定义的范围,这就产生了一个在其定义范围内的闭包.');
+ls.setItem("3_js闭包","闭包就是内部函数通过某种方式使其可见范围超出了其定义的范围,这就产生了一个在其定义范围内的闭包.");
 // 4-jq
 // 5-h5
 // 6-pm
 // 7-sql
 // 8-interview
-ls.setItem('8_关于闭包','概念：闭包就是内部函数通过某种方式使其可见范围超出了其定义的范围,这就产生了一个在其定义范围内的闭包<br/>function a(){<br/>var i=0;<br/>function b(){<br/>alert(++i);<br/>}<br/>return b;<br/>}<br/>var c = a();<br/>c();<br/>闭包函数返回时,该函数内部变量处于激活状态,函数所在栈区依然保留<br/>总结下<br/>1，闭包外层是个函数.<br/>2，闭包内部都有函数.<br/>3，闭包会return内部函数.<br/>4，闭包返回的函数内部不能有return.(因为这样就真的结束了)<br/>5，执行闭包后,闭包内部变量会存在,而闭包内部函数的内部变量不会存在<br/>闭包的应用场景<br/>1、保护函数内的变量安全。以最开始的例子为例，函数a中i只有函数b才能访问，而无法通过其他途径访问到，因此保护了i的安全性。<br/>2、在内存中维持一个变量。依然如前例，由于闭包，函数a中i的一直存在于内存中，因此每次执行c()，都会给i自加1。<br/>js闭包的用途<br/>1 匿名自执行函数<br/>2 缓存<br/>3 实现封装<br/>4 实现面向对象中的对象');
+ls.setItem("8_关于闭包","概念：闭包就是内部函数通过某种方式使其可见范围超出了其定义的范围,这就产生了一个在其定义范围内的闭包<br/>function a(){<br/>var i=0;<br/>function b(){<br/>alert(++i);<br/>}<br/>return b;<br/>}<br/>var c = a();<br/>c();<br/>闭包函数返回时,该函数内部变量处于激活状态,函数所在栈区依然保留<br/>总结下<br/>1，闭包外层是个函数.<br/>2，闭包内部都有函数.<br/>3，闭包会return内部函数.<br/>4，闭包返回的函数内部不能有return.(因为这样就真的结束了)<br/>5，执行闭包后,闭包内部变量会存在,而闭包内部函数的内部变量不会存在<br/>闭包的应用场景<br/>1、保护函数内的变量安全。以最开始的例子为例，函数a中i只有函数b才能访问，而无法通过其他途径访问到，因此保护了i的安全性。<br/>2、在内存中维持一个变量。依然如前例，由于闭包，函数a中i的一直存在于内存中，因此每次执行c()，都会给i自加1。<br/>js闭包的用途<br/>1 匿名自执行函数<br/>2 缓存<br/>3 实现封装<br/>4 实现面向对象中的对象");
+
+ls.setItem( "8_js样式选择", "用元素js方法实现根据样式选择某个元素下面的元素集合<br/>function getElementsByClass(clsName){<br/>var divs=document.getElementById('test')<br/>.getElementsByTagName('div');<br/>var len=divs.length,i,tmpArr=[];<br/>for(i=0;i<len;i++){<br/>if(divs[i].className==clsName){<br/>tmpArr.push(divs[i]);<br/>}<br/>}<br/>return tmpArr;<br/>}<br/>var result=getElementsByClass('clsB');<br/>console.log(result);" );
+
+ls.setItem( "8_js数组去重", "实现一个把数组里面的重复元素去除的方法<br/>var arr=[1,3,5,3,6,9,1,2,2];<br/>var arr=['a','b','a','c','c','ab','bc'];<br/>function removeRepeat(arr){<br/>var i,tmpArr=[];<br/>for(i in arr){<br/>if(tmpArr.join(',').indexOf(arr[i])==-1){<br/>tmpArr.push(arr[i]);<br/>}<br/>}<br/>return tmpArr;<br/>}<br/>var r=removeRepeat(arr);<br/>console.log(r);<br/>-----------------------------<br/>Array.prototype.unique=function(){<br/>var i,tmpArr=[];<br/>for(i in this){<br/>if(typeof this[i]!='function'){<br/>if(tmpArr.join(',').indexOf(this[i])==-1){<br/>tmpArr.push(this[i]);<br/>}<br/>}<br/>}<br/>return tmpArr;<br/>}<br/>var arr=['a','b','a','c','c','ab','bc'];<br/>var r=arr.unique();<br/>console.log(r);" );
+ls.setItem( "8_js中的call,apply,callee,caller说明", "1.call 方法<br>调用一个对象的一个方法，以另一个对象替换当前对象。<br>Function.call([thisObj[,arg1[,arg2[,[,.argN]]]]])<br>参数<br>thisObj<br>可选项。将被用作当前对象的对象。<br>arg1,arg2,,argN<br>可选项。将被传递方法参数序列。<br>说明<br>call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。<br>如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。<br>2.apply 方法<br>Function.apply(obj,args)方法能接收两个参数<br>obj：这个对象将代替Function类里this对象<br>args：这个是数组，它将作为参数传给Function（args-->arguments）<br>apply和call,这两个方法基本上是一个意思<br>区别在于 call 的第二个参数可以是任意类型，而apply的第二个参数必须是数组，也可以是arguments<br>3.callee 方法<br>返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文。<br>［function.］arguments.callee<br>可选项 function 参数是当前正在执行的 Function 对象的名称。<br>说明<br>callee 属性的初始值就是正被执行的 Function 对象。<br>callee 属性是 arguments 对象的一个成员，它表示对函数对象本身的引用，这有利于匿名函数的递归或者保证函数的封装性。还有需要注意的是callee拥有length属性，这个属性有时候用于验证还是比较好的。arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。<br>4.caller 方法<br>返回一个对函数的引用，该函数调用了当前函数。<br>functionName.caller<br>functionName 对象是所执行函数的名称。<br>说明<br>对于函数来说，caller 属性只有在函数执行时才有定义。 如果函数是由 Javascript 程序的顶层调用的，那么 caller 包含的就是 null。" );
+ls.setItem( "8_js touch事件解析", "一、touchstart事件<br>当你把一个手指放到一个可点击的元素（如果为不可点击的元素的话，将不会触发此事件）上时，<br>将会触发touchstart事件，表示touch事件的开始。<br>二、touchmove事件<br>在对元素进行拖拽的时候起主要作用的就是touchmove事件了，可以在此环节实现元素的<br>one-finger拖动跟随效果。主要会使用到的属性就是pageX和pageY获得当前手指的位置，然后利用<br>和touchstart时的pageX和pageY的差值，采用translate或translate3d（后者性能更好，利用了硬件<br>加速）来实现元素的位移。<br>三、touchend事件<br>很容易理解，当我们把手指从元素上拿开的时候就会触发此事件，对于touch拖动效果的制作，此状<br>态下，通常用于保存此次移动的位置，从而可以在下一次touchstart的时候将元素的位置还原成<br>touchend时所在的位置了。<br>四、touchcancel事件<br>系统取消touch事件的时候触发。至于系统什么时候会取消，不详<br><hr/>多触式系统中特有的touch对象（android和iOS乃至nokia最新 的meego系统都模拟了类似的对象）。这个对象封装一次 屏幕触摸，一般来自于手指。它在touch事件触发的时候产生，可以通过touch event handler的event对象取到 （一般是通过event.changedTouches属性）。这个对象包括一些重要的属性：<br>client/clientY：触摸点相对于浏览器窗口viewport的位置<br>pageX/pageY：触摸点相对于页面的位置<br>screenX/screenY：触摸点相对于屏幕的位置<br>identifier：touch对象的unique ID" );
 // 9-about
 // - - - - - - - - - -
 try{jsonp2()}catch(e){}
