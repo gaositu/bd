@@ -79,6 +79,7 @@ var zside = ( function ( window, $, undefined ) {
 				if ( callback ) {
 					window['zside'][ callback ]( title, from, id, tmpHref, this );					
 				}
+				// callback && window['zside'][ callback ]( title, from, id, tmpHref, this );
 				e.preventDefault();
 			});
 		}
